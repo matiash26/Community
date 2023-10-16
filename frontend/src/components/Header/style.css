@@ -1,0 +1,100 @@
+header {
+  height: 4.7rem;
+  background-color: #161616;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(47, 51, 54, 0.425);
+}
+header > nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+header > nav > img {
+  width: 200px;
+  border-radius: 0.5rem;
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo > span {
+  color: #4d1c6e;
+  font-size: 2rem;
+  font-weight: 800;
+}
+.menu {
+  display: flex;
+  gap: 1rem;
+}
+.menu > li {
+  list-style: none;
+}
+.menu > li > a {
+  font-size: 2rem;
+  line-height: 0.2rem;
+  color: #b483d3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 300;
+}
+.menu > li > a:hover {
+  background-color: rgb(35, 35, 35);
+}
+.menuMobile {
+  display: none;
+}
+@media screen and (max-width: 778px) {
+  header {
+    height: 3rem;
+    position: fixed;
+    width: 100%;
+    top: calc(100vh - 3rem);
+    z-index: 3;
+  }
+  header > nav {
+    justify-content: center;
+    gap: 2rem;
+  }
+  .menu > li > a {
+    font-size: 1.8rem;
+  }
+  .sendPost {
+    position: static !important;
+    padding-top: 0.5rem !important;
+  }
+  main {
+    margin: -4.7rem 0 4.7rem 0 !important;
+  }
+
+  .openMenu {
+    top: inherit !important;
+    bottom: 2.3rem;
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+  }
+  .logo {
+    display: none !important;
+  }
+  .userMenu > div {
+    display: none;
+  }
+  .menuMobile {
+    display: inline;
+    margin-left: auto;
+  }
+}
+@media screen and (max-width: 400px) {
+  .menu > li > a {
+    padding: 0.5rem 1.2rem;
+  }
+
+  header > nav {
+    justify-content: space-between;
+    padding: 0 1rem;
+  }
+}

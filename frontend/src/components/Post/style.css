@@ -1,0 +1,17 @@
+.midiaContainer {
+  width: 100%;
+  background-color: transparent;
+  padding: 1.3rem 1.3rem 0;
+  border-bottom: 1px solid rgba(47, 51, 54, 0.425);
+  border-left: 1px solid rgba(47, 51, 54, 0.425);
+  border-right: 1px solid rgba(47, 51, 54, 0.425);
+}
+
+@media screen and (max-width: 768px) {
+  .video,
+  .videoImg,
+  .iFrame {
+    width: 100%;
+    height: 360px;
+  }
+}

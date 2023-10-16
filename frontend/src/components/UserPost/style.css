@@ -1,0 +1,140 @@
+.userPost > div > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  box-shadow: 0px 0px 0px 2px #b483d3;
+  background-size: contain;
+}
+.userPost,
+.userPost > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.userInfPost {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.userInfPost > span:nth-child(1) {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+}
+.userInfPost > a:nth-child(1) > svg {
+  color: #b483d3;
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+}
+.userInfPost > span:nth-child(2) {
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 0.9;
+  color: gray;
+}
+.userInfPost > a {
+  color: white;
+  text-decoration: none;
+  opacity: 0.9;
+}
+.userInfPost > span {
+  color: white;
+}
+.userText {
+  font-size: 0.945rem;
+  font-weight: 500;
+  color: white;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  word-wrap: break-word;
+}
+.userInteractions {
+  display: flex;
+  gap: 1.3rem;
+  padding: 1.3rem 0 1.3rem 0;
+}
+.userInteractions > span,
+.userInteractions > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: gray;
+  gap: 0.3rem;
+  position: relative;
+}
+.userInteractions > span > svg,
+.userInteractions > a > svg,
+#copy {
+  color: #b483d3;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+#copy > svg {
+  font-size: 1.4rem;
+  border-radius: 100%;
+}
+#copy > svg:active {
+  color: #4d1c6e;
+}
+.userInteractions > span:nth-child(2):hover > .emotes {
+  width: 210px;
+  height: 55px;
+  opacity: 1;
+  border-radius: 0.5rem;
+  transition: all 150ms ease-in-out;
+  background-color: #161616;
+}
+.emotes {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  gap: 0.8rem;
+  display: flex;
+  padding: 0 0.5rem;
+  justify-content: space-around;
+  align-items: center;
+
+  position: absolute;
+  overflow: hidden;
+  bottom: 1.3rem;
+  background-color: #dfdfdf;
+  transition: all 150ms ease-in-out 150ms;
+}
+
+.emotes > li {
+  position: relative;
+  list-style: none;
+}
+.emotes > li > img {
+  width: 39px;
+  height: 39px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  display: inline-block;
+  transition: transform 100ms ease-in-out;
+  cursor: pointer;
+}
+.emotes > li:hover > img {
+  transform: scale(1.5);
+  transition: transform 100ms ease-in-out;
+}
+.emotes > li > span {
+  position: absolute;
+  right: 0;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0 0.2rem;
+  font-size: 0.7rem;
+  transition: transform 100ms ease-in-out;
+}
+.emotes > li:hover > span {
+  transform: scale(1.5);
+  transition: transform 100ms ease-in-out;
+}

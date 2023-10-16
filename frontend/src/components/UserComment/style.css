@@ -1,0 +1,31 @@
+.userComment {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(47, 51, 54, 0.425);
+}
+.userComment > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.comment > p {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+.userCommentInf {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+.userCommentInf > h2 {
+  font-size: .8rem;
+}
+.userCommentInf > span {
+  opacity: 0.6;
+  font-size: 0.8rem;
+}

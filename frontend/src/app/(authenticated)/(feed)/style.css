@@ -1,0 +1,12 @@
+.feedContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.feedContainer > section {
+  max-width: 587px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
