@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useCallback, useState } from 'react';
-import useInfinityScroll from '@/components/Hooks/useInfinityScroll';
+import useInfinityScroll from '@/Hooks/useInfinityScroll';
 import { useSession } from 'next-auth/react';
 import { userList } from '@/utils/community';
 import { ISession } from '@/context/SessionsProvider';
@@ -23,7 +23,7 @@ export default function Content() {
         setUserListData((prev) => [...prev, ...response]);
         response.length < 15 ? setThereIsMoreData(false) : null;
       } catch (error) {
-        console.error(error)        
+        console.error(error);
       }
     }
   }, [pag, session]);

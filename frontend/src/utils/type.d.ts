@@ -29,6 +29,9 @@ export interface IPost {
   totalOfComments: number;
   page: string;
 }
+interface IPostResponse extends IResponse {
+  data: IPost[];
+}
 export interface IPostInfo {
   postInf: IPost;
 }

@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useCallback, useState } from 'react';
-import useInfinityScroll from '@/components/Hooks/useInfinityScroll';
+import useInfinityScroll from '@/Hooks/useInfinityScroll';
 import UserPermission from '@/components/UserPermission';
 import { IPostTable } from '@/utils/type';
 import { useSession } from 'next-auth/react';
@@ -23,12 +23,12 @@ export default function Mod() {
         const response = (await postList(
           pag.limit,
           pag.offset,
-          token
+          token,
         )) as IPostTable[];
         setPostData((prev) => [...prev, ...response]);
         response.length < 15 ? setThereIsMoreData(false) : null;
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     }
   }, [pag, session]);
