@@ -35,7 +35,7 @@ export default function SendPost() {
     setOpt(false);
   };
   const handleInput = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     const el = event.target as HTMLInputElement | HTMLTextAreaElement;
 
@@ -112,7 +112,13 @@ export default function SendPost() {
               <BsImages />
               <span>{fileName}</span>
             </label>
-            <input type="file" onChange={handleInput} name="file" id="post" />
+            <input
+              type="file"
+              onChange={handleInput}
+              name="file"
+              id="post"
+              accept=".png, .jpeg, .jpg, .mp4"
+            />
             <button type="submit">Enviar</button>
           </div>
         </form>

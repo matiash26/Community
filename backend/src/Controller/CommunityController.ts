@@ -265,12 +265,14 @@ app.post('/api/search', async (req: Request, res: express.Response) => {
 app.get('/api/userList', async (req: Request, res: express.Response) => {
   const limit = req.query.limit as string;
   const offset = req.query.offset as string;
-  const userName = res.locals.userName;
+  const userName = String(res.locals.userName).toLowerCase();
   const numberValid =
     Number.isInteger(parseInt(limit)) && Number.isInteger(parseInt(offset));
   if (numberValid) {
     const data = await community.userList(+limit, +offset);
-    const withOutUser = data.filter((each) => each.username !== userName);
+    const withOutUser = data.filter(
+      (each) => each.username.toLowerCase() !== userName,
+    );
     res.send(withOutUser);
     return;
   }
