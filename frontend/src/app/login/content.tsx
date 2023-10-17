@@ -18,7 +18,7 @@ export default function Content() {
         textTransform: 'capitalize',
       }}
     >
-      <h1>Você será redirecionado para fazer login...</h1>
+      <h1>Você será redirecionado...</h1>
     </main>
   );
 }

@@ -54,7 +54,7 @@ header > nav > img {
     height: 3rem;
     position: fixed;
     width: 100%;
-    top: calc(100vh - 3rem);
+    bottom: 0;
     z-index: 3;
   }
   header > nav {

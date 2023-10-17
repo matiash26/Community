@@ -6,12 +6,70 @@
   border-left: 1px solid rgba(47, 51, 54, 0.425);
   border-right: 1px solid rgba(47, 51, 54, 0.425);
 }
+.emotes {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  gap: 0.8rem;
+  display: flex;
+  padding: 0 0.5rem;
+  justify-content: space-around;
+  align-items: center;
 
+  position: absolute;
+  overflow: hidden;
+  bottom: 1.3rem;
+  background-color: #dfdfdf;
+  transition: all 100ms ease-in-out 150ms;
+}
+
+.emotes > li {
+  position: relative;
+  list-style: none;
+}
+.emotes > li > img {
+  width: 39px;
+  height: 39px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  display: inline-block;
+  transition: transform 100ms ease-in-out;
+  cursor: pointer;
+}
+.emotes > li:hover > img {
+  transform: scale(1.5);
+  transition: transform 100ms ease-in-out;
+}
+.emotes > li > span {
+  position: absolute;
+  right: 0;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0 0.2rem;
+  font-size: 0.7rem;
+  transition: transform 100ms ease-in-out;
+}
+.emotes > li:hover > span {
+  transform: scale(1.5);
+  transition: transform 100ms ease-in-out;
+}
+.openEmotes {
+  width: 210px;
+  height: 55px;
+  opacity: 1;
+  border-radius: 0.5rem;
+  transition: all 100ms ease-in-out;
+  background-color: #161616;
+}
 @media screen and (max-width: 768px) {
   .video,
   .videoImg,
   .iFrame {
     width: 100%;
     height: 360px;
+  }
+  .emotes {
+    left: -4rem;
   }
 }

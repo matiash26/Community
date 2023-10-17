@@ -19,13 +19,17 @@ export default function Mod() {
   const fetchData = useCallback(async () => {
     const token = session?.accessToken as string;
     if (thereIsMoreData && token) {
-      const response = (await postList(
-        pag.limit,
-        pag.offset,
-        token
-      )) as IPostTable[];
-      setPostData((prev) => [...prev, ...response]);
-      response.length < 15 ? setThereIsMoreData(false) : null;
+      try {
+        const response = (await postList(
+          pag.limit,
+          pag.offset,
+          token
+        )) as IPostTable[];
+        setPostData((prev) => [...prev, ...response]);
+        response.length < 15 ? setThereIsMoreData(false) : null;
+      } catch (error) {
+        console.error(error)
+      }
     }
   }, [pag, session]);
 

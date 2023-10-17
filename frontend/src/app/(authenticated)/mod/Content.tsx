@@ -18,9 +18,13 @@ export default function Content() {
   const fetchData = useCallback(async () => {
     const token = session?.accessToken as string;
     if (thereIsMoreData && token) {
-      const response = (await userList({ ...pag, token })) as IUser[];
-      setUserListData((prev) => [...prev, ...response]);
-      response.length < 15 ? setThereIsMoreData(false) : null;
+      try {
+        const response = (await userList({ ...pag, token })) as IUser[];
+        setUserListData((prev) => [...prev, ...response]);
+        response.length < 15 ? setThereIsMoreData(false) : null;
+      } catch (error) {
+        console.error(error)        
+      }
     }
   }, [pag, session]);
 

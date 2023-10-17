@@ -18,19 +18,22 @@ function Content({ page, user }: Props) {
   const [posts, setPosts] = useState<IPost[]>([]);
   const { data: session } = useSession() as ISession;
   useInfinityScroll(setPag);
-  
   const fetch = useCallback(async () => {
     const token = session?.accessToken as string;
     if (thereIsMoreData && token) {
-      const response = (await getAllFeed(
-        page,
-        pag.limit,
-        pag.offset,
-        user,
-        token
-      )) as IPost[];
-      setPosts((prev: IPost[]) => [...prev, ...response]);
-      response.length < 10 ? setThereIsMoreData(false) : null;
+      try {
+        const response = (await getAllFeed(
+          page,
+          pag.limit,
+          pag.offset,
+          user,
+          token,
+        )) as IPost[];
+        setPosts((prev: IPost[]) => [...prev, ...response]);
+        response.length < 10 ? setThereIsMoreData(false) : null;
+      } catch (error) {
+        console.error(error);
+      }
     }
   }, [pag, session]);
   useEffect(() => {
