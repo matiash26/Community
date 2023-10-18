@@ -4,12 +4,12 @@ import { FaRegCommentAlt, FaRegHeart } from 'react-icons/fa';
 import { GlobalContext } from '@/context/globalProvider';
 import { useSession } from 'next-auth/react';
 import { IPostInfo } from '@/utils/type';
-import MediaContent from '../Media';
 import { sendLike } from '@/utils/community';
 import { ISession } from '@/context/SessionsProvider';
 import UserPost from '@/components/UserPost';
 import Iframe from '../Iframe';
 import './style.css';
+import path from 'path';
 
 const stateInit = { like: '0', mad: '0', funny: '0', clap: '0' };
 
@@ -67,7 +67,9 @@ export default function Post({ postInf, children }: IPostInfo) {
     <article className="midiaContainer">
       <UserPost user={postInf} />
       <h2 className="userText">{text}</h2>
-      <div className="userMidia">{children}</div>
+      <div className="userMidia">
+        {isReact ? <Iframe url={pathMedia} /> : children}
+      </div>
       <div className="userInteractions">
         <span onClick={() => handleVideo(`${id}`)}>
           <FaRegCommentAlt /> {totalOfComments}
