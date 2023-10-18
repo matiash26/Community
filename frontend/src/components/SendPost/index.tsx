@@ -98,7 +98,7 @@ export default function SendPost() {
                     value={post.videoId}
                     name="videoId"
                     id="videoId"
-                    placeholder="videoId"
+                    placeholder="VideoId"
                   />
                   <p className="example">
                     youtube.com/watch?v=<span>xxxxx</span>
