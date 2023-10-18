@@ -10,6 +10,7 @@ import './style.css';
 function Search(): JSX.Element {
   const [search, setSearch] = useState<IUser[]>([]);
   const { data: session } = useSession() as ISession;
+  const thereIsUser = search?.length;
 
   const handleSearch = async (event: ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
@@ -24,7 +25,7 @@ function Search(): JSX.Element {
     }
   };
   return (
-    <aside className="search">
+    <aside className={`search ${thereIsUser && 'userFound'}`}>
       <form>
         <input type="text" onChange={handleSearch} placeholder="Buscar..." />
       </form>

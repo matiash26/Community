@@ -8,11 +8,9 @@ interface IUser {
 }
 export default function UserPost({ user }: IUser) {
   const { id, picture, username, date } = user;
-  let copy = false;
   const handleCopy = () => {
     const url = document.location.href;
     navigator.clipboard.writeText(url + '?post=' + id);
-    copy = true;
   };
   return (
     <div className="userPost">

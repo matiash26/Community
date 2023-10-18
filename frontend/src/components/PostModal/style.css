@@ -138,11 +138,17 @@
   padding: 0.5rem 1rem;
   text-transform: uppercase;
 }
-
+.userPostInf > .midiaContainer {
+  padding: 0;
+  border: none;
+}
+.userPostInf .openEmotes {
+  left: -4rem;
+}
 @media screen and (max-width: 778px) {
   .videoContent {
     width: 100% !important;
-    height: 93% !important;
+    height: 97% !important;
     max-height: 100vh !important;
     flex-direction: column;
     overflow-y: auto !important;
@@ -158,13 +164,14 @@
     width: 100% !important;
     overflow: initial !important;
     flex: 1;
+    margin-top: 1rem;
+  }
+  .exist .video,
+  .exist .videoImg {
+    border-radius: 0 !important;
+    margin-top: 1rem;
   }
 
-  .inputComment {
-    position: sticky;
-    bottom: 0;
-    background-color: #191b1c;
-  }
   .exit {
     position: static;
     padding: 0.2rem 0;

@@ -11,6 +11,7 @@ import UserPost from '../UserPost';
 import { BsXLg } from 'react-icons/bs';
 import { IPost } from '@/utils/type';
 import Media from '../Post';
+import Post from '../Post';
 import 'plyr/dist/plyr.css';
 import './style.css';
 
@@ -53,8 +54,7 @@ export default function PostModal() {
             </span>
             {isMedia && (
               <div className="userPostInf">
-                <UserPost user={post} />
-                <p className="userText">{post?.text}</p>
+                <Post postInf={post} />
               </div>
             )}
           </div>

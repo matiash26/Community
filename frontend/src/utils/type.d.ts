@@ -34,6 +34,7 @@ interface IPostResponse extends IResponse {
 }
 export interface IPostInfo {
   postInf: IPost;
+  children?: ReactNode;
 }
 export interface IProps {
   postInf: IPost;

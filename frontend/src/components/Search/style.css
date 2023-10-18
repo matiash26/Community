@@ -6,12 +6,15 @@
 }
 .search > form {
   background-color: #161616;
-  border-radius: 0.5rem 0.5rem 0 0;
+  border-radius: 0.5rem;
   display: flex;
   justify-content: center;
   padding: 0.9rem 1.5rem 1.5rem 1.5rem;
   position: sticky;
   top: 1.5rem;
+}
+.userFound > form {
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 .search > form > input {
   background-color: #232323;

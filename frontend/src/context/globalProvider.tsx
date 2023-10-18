@@ -48,6 +48,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     const token = session?.accessToken as string;
     if (token) {
       const comment = (await getComment(postId, token)) as IComments;
+      console.log(comment);
       if (!comment.error) {
         setModalPost({
           post: comment.post,
@@ -74,7 +75,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     if (getPostIdFromParams) {
       handleVideo(getPostIdFromParams);
     }
-  }, []);
+  }, [session]);
   return (
     <GlobalContext.Provider
       value={{

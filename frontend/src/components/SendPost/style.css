@@ -89,6 +89,9 @@
   font-weight: 600;
   opacity: 0.9;
 }
+.textArea::placeholder {
+  line-height: 1.35rem;
+}
 .textArea::-webkit-scrollbar {
   background-color: #b483d3;
   width: 0.8rem;

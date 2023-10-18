@@ -13,8 +13,8 @@ import './style.css';
 
 const stateInit = { like: '0', mad: '0', funny: '0', clap: '0' };
 
-export default function Post({ postInf }: IPostInfo) {
-    const [openEmote, setOpenEmote] = useState(false);
+export default function Post({ postInf, children }: IPostInfo) {
+  const [openEmote, setOpenEmote] = useState(false);
   const [emote, setEmote] = useState(stateInit);
   const { handleVideo } = useContext(GlobalContext);
   const { data: session } = useSession() as ISession;
@@ -34,7 +34,7 @@ export default function Post({ postInf }: IPostInfo) {
   const file = process.env.NEXT_PUBLIC_URL_FILE as string;
   const totalLikes = Object.values(emote).reduce(
     (acc, el) => (acc += parseInt(el)),
-    0
+    0,
   );
 
   const handleOpenEmote = () => {
@@ -67,13 +67,7 @@ export default function Post({ postInf }: IPostInfo) {
     <article className="midiaContainer">
       <UserPost user={postInf} />
       <h2 className="userText">{text}</h2>
-      <div className="userMidia">
-        {isReact ? (
-          <Iframe url={pathMedia} />
-        ) : (
-          <MediaContent path={pathMedia} />
-        )}
-      </div>
+      <div className="userMidia">{children}</div>
       <div className="userInteractions">
         <span onClick={() => handleVideo(`${id}`)}>
           <FaRegCommentAlt /> {totalOfComments}
@@ -81,7 +75,7 @@ export default function Post({ postInf }: IPostInfo) {
         <span onClick={handleOpenEmote}>
           <FaRegHeart />
           {totalLikes}
-          <ul className={`emotes ${openEmote && "openEmotes"}`}>
+          <ul className={`emotes ${openEmote && 'openEmotes'}`}>
             <li onClick={() => handleLike('0')}>
               <img src={file + 'emotes/like.webp'} alt="like" />
               <span className="emoteCount">{emote.like}</span>

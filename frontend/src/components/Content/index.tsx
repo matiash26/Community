@@ -3,8 +3,9 @@ import { useState, useEffect, useCallback } from 'react';
 import useInfinityScroll from '../../Hooks/useInfinityScroll';
 import { useSession } from 'next-auth/react';
 import { getAllFeed } from '@/utils/community';
-import { IPost, IResponse } from '@/utils/type';
 import { ISession } from '@/context/SessionsProvider';
+import { IPost } from '@/utils/type';
+import Media from '../Media';
 import Post from '../Post';
 
 interface Props {
@@ -44,7 +45,9 @@ function Content({ page, user }: Props) {
   return (
     <>
       {posts.map((post: IPost) => (
-        <Post key={post.id} postInf={post} />
+        <Post key={post.id} postInf={post}>
+          <Media key={post.id} path={post.pathMedia} />
+        </Post>
       ))}
     </>
   );
