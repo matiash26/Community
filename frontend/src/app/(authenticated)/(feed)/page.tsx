@@ -1,8 +1,7 @@
-import Content from '@/components/Content';
 import ProfileCard from '@/components/ProfileCard';
 import SendPost from '@/components/SendPost';
+import Content from '@/components/Content/';
 import Search from '@/components/Search';
-import CatSpinner from './CatSpinner';
 import './style.css';
 
 export default async function Feed() {
@@ -13,7 +12,6 @@ export default async function Feed() {
         <section>
           <SendPost />
           <Content page="feed" />
-          <CatSpinner />
         </section>
         <Search />
       </main>

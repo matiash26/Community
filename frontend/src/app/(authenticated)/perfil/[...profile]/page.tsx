@@ -1,9 +1,9 @@
-import { searchUser } from '@/utils/community';
-import Content from '@/components/Content';
-import NotFound from '@/components/NotFound/page';
-import DescProfile from '@/components/DescProfile';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { searchUser } from '@/utils/community';
+import DescProfile from '@/components/DescProfile';
+import NotFound from '@/components/NotFound/page';
+import Content from '@/components/Content/';
 import './style.css';
 
 interface IParams {
@@ -16,7 +16,7 @@ export default async function Profile({ params }: IParams) {
   const userProfile = params.profile[0];
   const session = (await getServerSession(authOptions)) as ISessionServer;
   const token = session.accessToken as string;
-  
+
   const user = await searchUser(userProfile, 'get', token);
   const [userInf] = user.search;
   if (user.error || !userInf) {

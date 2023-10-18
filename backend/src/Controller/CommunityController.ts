@@ -18,12 +18,16 @@ const storage = multer.diskStorage({
   },
   filename: async function (req, file, cb) {
     const type = TypeOfMedia(file.originalname);
-    cb(null, `${Date.now() + btoa(file.originalname)}.${type}`);
-    fileName = `${Date.now() + btoa(file.originalname)}.${type}`;
+    const fileSize = file?.size / (1024 * 1024);
+    if (fileSize < 20) {
+      cb(null, `${Date.now() + btoa(file.originalname)}.${type}`);
+      fileName = `${Date.now() + btoa(file.originalname)}.${type}`;
+    }
   },
 });
 const app = express();
 const upload = multer({ storage: storage });
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

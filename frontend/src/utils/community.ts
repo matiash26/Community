@@ -20,7 +20,6 @@ export async function getAllFeed(
     {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
-      cache: 'no-store',
     },
   );
   if (!response.ok) throw Error('Falha ao receber o post');

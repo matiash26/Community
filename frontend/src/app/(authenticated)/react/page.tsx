@@ -1,5 +1,4 @@
 import ProfileCard from '@/components/ProfileCard';
-import CatSpinner from '../(feed)/CatSpinner';
 import SendPost from '@/components/SendPost';
 import Content from '@/components/Content';
 import Search from '@/components/Search';
@@ -12,7 +11,6 @@ export default function React() {
         <section>
           <SendPost />
           <Content page="react" />
-          <CatSpinner />
         </section>
         <Search />
       </main>
