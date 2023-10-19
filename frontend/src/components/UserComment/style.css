@@ -23,9 +23,11 @@
   color: white;
 }
 .userCommentInf > h2 {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 .userCommentInf > span {
-  opacity: 0.6;
   font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.9;
+  color: gray;
 }

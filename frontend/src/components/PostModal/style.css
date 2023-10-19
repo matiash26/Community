@@ -1,7 +1,6 @@
 .plyr--video {
   height: 100%;
 }
-
 .videoContainer {
   position: fixed;
   width: 100vw;
@@ -15,6 +14,9 @@
   top: -60px;
   animation: modal 0.3s forwards;
   box-shadow: 2px 6px 27px black;
+}
+.videoContainer .midiaContainer {
+  padding: 1rem 1rem 0 !important;
 }
 .videoContent {
   background-color: rgb(25, 27, 28);
@@ -120,6 +122,9 @@
 .exist .video,
 .exist .videoImg {
   border-radius: 1rem 0 0 1rem !important;
+}
+.exist .midiaContainer {
+  padding: 0 !important;
 }
 .notExist .videoItem {
   display: none !important;

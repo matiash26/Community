@@ -9,7 +9,6 @@ import { ISession } from '@/context/SessionsProvider';
 import UserPost from '@/components/UserPost';
 import Iframe from '../Iframe';
 import './style.css';
-import path from 'path';
 
 const stateInit = { like: '0', mad: '0', funny: '0', clap: '0' };
 
@@ -79,19 +78,19 @@ export default function Post({ postInf, children }: IPostInfo) {
           {totalLikes}
           <ul className={`emotes ${openEmote && 'openEmotes'}`}>
             <li onClick={() => handleLike('0')}>
-              <img src={file + 'emotes/like.webp'} alt="like" />
+              <img src="/emotes/like.webp" alt="like" />
               <span className="emoteCount">{emote.like}</span>
             </li>
             <li onClick={() => handleLike('1')}>
-              <img src={file + 'emotes/mad.png'} alt="mad" />
+              <img src="/emotes/mad.png" alt="mad" />
               <span className="emoteCount">{emote.mad}</span>
             </li>
             <li onClick={() => handleLike('2')}>
-              <img src={file + 'emotes/haha.png'} alt="hahaha" />
+              <img src="/emotes/haha.png" alt="hahaha" />
               <span className="emoteCount">{emote.funny}</span>
             </li>
             <li onClick={() => handleLike('3')}>
-              <img src={file + 'emotes/clap.gif'} alt="clap" />
+              <img src="/emotes/clap.gif" alt="clap" />
               <span className="emoteCount">{emote.clap}</span>
             </li>
           </ul>

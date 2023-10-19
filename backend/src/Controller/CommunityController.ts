@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
-import TypeOfMedia from '../utils/typeOfMedia.js';
-import middleware from '../middleware.js';
+import multerStorage from '../utils/multer.js';
+import middleware from '../utils/middleware.js';
 import Community from '../Models/CommunityModels.js';
 import howLong from '../utils/howLong.js';
 import getDate from '../utils/date.js';
@@ -8,60 +8,32 @@ import { IPost } from './type.js';
 import * as express from 'express';
 import * as multer from 'multer';
 import * as cors from 'cors';
-
 const community = new Community();
-let fileName: string;
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, __dirname + '/../public');
-  },
-  filename: async function (req, file, cb) {
-    const type = TypeOfMedia(file.originalname);
-    const fileSize = file?.size / (1024 * 1024);
-    if (fileSize < 20) {
-      cb(null, `${Date.now() + btoa(file.originalname)}.${type}`);
-      fileName = `${Date.now() + btoa(file.originalname)}.${type}`;
-    }
-  },
-});
 const app = express();
-const upload = multer({ storage: storage });
-
 app.use(cors());
+app.use(middleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use('/upload', express.static(__dirname + '/../public'));
-app.use(middleware);
+const { storage, getFileName, clearFilename } = multerStorage();
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 15 * 1024 * 1024 },
+});
 
 app.post(
   '/api/submit',
   upload.single('file'),
   async (req: Request, res: Response) => {
-    const file = req.file;
     const { text, page, videoId } = req.body;
     const checkPage = page === 'Feed' || page === 'React';
     const textLenght = text.split('').length;
-    const typedAllowed = ['jpeg', 'png', 'jpg', 'mp4'];
-    const typeOfFile = file?.mimetype.split('/')[1];
     const userName = res.locals.userName;
+    let fileName = getFileName();
     const date = getDate();
-    const fileSize = file?.size / (1024 * 1024);
     if (textLenght <= 500 && textLenght > 0 && checkPage) {
-      if (file && !typedAllowed.includes(typeOfFile)) {
-        res.send({
-          message:
-            'formato de arquivos permitidos são: ' + typedAllowed.join(''),
-        });
-        return;
-      }
-      if (fileSize > 20) {
-        res.send({
-          error: true,
-          message: 'o arquivo precisa ser menor que 20mb!',
-        });
-        return;
-      }
       const name = fileName || videoId;
       const [user] = await community.getUserByEmailOrUser(userName);
       const approved = user.role === '1' || user.role === '2' ? '2' : '1';
@@ -75,6 +47,7 @@ app.post(
       );
       if (response[0].affectedRows === 1) {
         res.send({ error: false, message: 'post enviado com sucesso!' });
+        clearFilename();
         return;
       }
       res.send({

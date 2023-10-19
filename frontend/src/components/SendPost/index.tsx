@@ -1,25 +1,32 @@
 'use client';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { IResponse } from '@/utils/type';
 import { BsImages } from 'react-icons/bs';
 import { postData } from '@/utils/community';
 import { ISession } from '@/context/SessionsProvider';
 import './style.css';
 
+const ErrorInit = {
+  error: false,
+  message: '',
+};
+const postInit = {
+  text: '',
+  file: null,
+  videoId: '',
+};
 type IPosts = {
   text: string;
   file?: File | null;
   videoId: string;
 };
 export default function SendPost() {
-  const { data: session } = useSession() as ISession;
-  const [post, setPost] = useState<IPosts>({
-    text: '',
-    file: null,
-    videoId: '',
-  });
-  const [select, setSelect] = useState('Feed');
   const [opt, setOpt] = useState(false);
+  const [select, setSelect] = useState('Feed');
+  const [post, setPost] = useState<IPosts>(postInit);
+  const { data: session } = useSession() as ISession;
+  const [error, setError] = useState<IResponse>(ErrorInit);
 
   const fileName = post?.file?.name;
   const userTyping = !!post.text.split('').length;
@@ -58,8 +65,11 @@ export default function SendPost() {
       bodyFormData.append('page', select);
       try {
         const response = await postData(bodyFormData, token);
+        response.error && setError(response);
         if (!response.error) {
+          console.log('render', response, post);
           setPost({ text: '', file: null, videoId: '' });
+          setError(ErrorInit);
         }
       } catch (error) {
         console.error(error);
@@ -73,6 +83,7 @@ export default function SendPost() {
           <li onClick={openSelect}>{select}</li>
           <li onClick={handleSelect}>{filter}</li>
         </ul>
+        {error && <p className="errorSubmit">{error.message}</p>}
         <form onSubmit={onSubmit}>
           <div
             className={`submitPost ${userTyping && 'open'} ${

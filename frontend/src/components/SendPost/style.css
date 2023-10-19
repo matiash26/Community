@@ -188,6 +188,12 @@ form > div > label > svg:hover {
   color: #e8003f;
   font-size: 0.9rem;
 }
+.errorSubmit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8003f;
+}
 @media screen and (max-width: 778px) {
   .inputs {
     flex-direction: column;

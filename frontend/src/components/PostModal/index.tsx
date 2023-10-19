@@ -7,7 +7,6 @@ import MediaContent from '../Media';
 import { ISession } from '@/context/SessionsProvider';
 import TypeOfMedia from '@/utils/TypeOfMedia';
 import UserComment from '../UserComment';
-import UserPost from '../UserPost';
 import { BsXLg } from 'react-icons/bs';
 import { IPost } from '@/utils/type';
 import Media from '../Post';

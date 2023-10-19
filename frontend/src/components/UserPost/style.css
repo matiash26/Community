@@ -39,9 +39,7 @@
   text-decoration: none;
   opacity: 0.9;
 }
-.userInfPost > span {
-  color: white;
-}
+
 .userText {
   font-size: 0.945rem;
   font-weight: 500;
