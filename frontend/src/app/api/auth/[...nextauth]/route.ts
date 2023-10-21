@@ -22,11 +22,11 @@ export const authOptions: NextAuthOptions = {
         token.refresh_token = account.refresh_token as string;
         try {
           const { data } = await login(token);
-          token.role = data[0].role as string;
-          token.totalLikes = data[0].totalLikes as number;
-          token.totalComments = data[0].totalComments as number;
-          token.totalPosts = data[0].totalPosts as number;
-          token.descText = data[0].descText as string;
+          token.role = data.role as string;
+          token.totalLikes = data.totalLikes as number;
+          token.totalComments = data.totalComments as number;
+          token.totalPosts = data.totalPosts as number;
+          token.descText = data.descText as string;
         } catch (error) {
           console.error(error);
         }

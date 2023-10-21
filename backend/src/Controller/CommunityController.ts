@@ -1,13 +1,13 @@
+import { IPost, IComment, IUser, ISql, ILikes } from '../Models/type';
 import { Response, Request } from 'express';
-import multerStorage from '../utils/multer.js';
-import middleware from '../utils/middleware.js';
-import Community from '../Models/CommunityModels.js';
-import howLong from '../utils/howLong.js';
-import getDate from '../utils/date.js';
-import { IPost } from './type.js';
-import * as express from 'express';
-import * as multer from 'multer';
-import * as cors from 'cors';
+import multerStorage from '../utils/multer';
+import middleware from '../utils/middleware';
+import Community from '../Models/CommunityModels';
+import howLong from '../utils/howLong';
+import getDate from '../utils/date';
+import express from 'express';
+import multer from 'multer';
+import cors from 'cors';
 const community = new Community();
 
 const app = express();
@@ -35,16 +35,18 @@ app.post(
     const date = getDate();
     if (textLenght <= 500 && textLenght > 0 && checkPage) {
       const name = fileName || videoId;
-      const [user] = await community.getUserByEmailOrUser(userName);
+      const [user] = (await community.getUserByEmailOrUser(
+        userName,
+      )) as IUser[];
       const approved = user.role === '1' || user.role === '2' ? '2' : '1';
-      const response = await community.sendPost(
+      const response = (await community.sendPost(
         user.id,
         text,
         name,
         approved,
         date,
         page,
-      );
+      )) as ISql[];
       if (response[0].affectedRows === 1) {
         res.send({ error: false, message: 'post enviado com sucesso!' });
         clearFilename();
@@ -93,12 +95,15 @@ app.post('/api/likes', async (req: Request, res: express.Response) => {
   const userName = res.locals.userName;
   const likesAllowed = ['0', '1', '2', '3'].includes(typeOfLike);
   if (likesAllowed) {
-    const [user] = await community.getUserByEmailOrUser(userName);
-    const thisUserHasLiked = await community.getUserLiked(user.id, postId);
+    const [user] = (await community.getUserByEmailOrUser(userName)) as IUser[];
+    const thisUserHasLiked = (await community.getUserLiked(
+      user.id,
+      postId,
+    )) as IUser[];
     const thereIsLike = thisUserHasLiked.length > 0;
     if (thereIsLike) {
       await community.updateLike(postId, typeOfLike, user.id);
-      const [row] = await community.getLikedByPost(postId);
+      const [row] = (await community.getLikedByPost(postId)) as ILikes[];
       res.send({
         error: false,
         message: 'liked com sucesso!',
@@ -106,8 +111,13 @@ app.post('/api/likes', async (req: Request, res: express.Response) => {
       });
       return;
     }
-    const [response] = await community.likedPost(user.id, postId, typeOfLike);
-    const [row] = await community.getLikedByPost(postId);
+    const response = (await community.likedPost(
+      user.id,
+      postId,
+      typeOfLike,
+    )) as ISql;
+
+    const [row] = (await community.getLikedByPost(postId)) as ILikes[];
     if (response.affectedRows === 1) {
       res.send({
         error: false,
@@ -130,13 +140,13 @@ app.get('/api/comment', async (req: Request, res: express.Response) => {
   const postId = req.query.postId as string;
   const checkPostId = Number.isInteger(parseInt(postId));
   if (checkPostId) {
-    const getComment = await community.getComments(postId);
-    const [getuserPost] = await community.getPostById(postId);
+    const getComment = (await community.getComments(postId)) as IComment[];
+    const [getuserPost] = (await community.getPostById(postId)) as IPost[];
     const dataPostConvert = {
       ...getuserPost,
       date: howLong(getuserPost.date),
     };
-    const dateCommentConvert = getComment.map((comment) => ({
+    const dateCommentConvert = getComment.map((comment: IComment) => ({
       ...comment,
       date: howLong(comment.date),
     }));
@@ -162,13 +172,13 @@ app.get('/api/comment', async (req: Request, res: express.Response) => {
 app.post('/api/comment', async (req: Request, res: express.Response) => {
   const { postId, comment } = req.body;
   const userName = res.locals.userName;
-  const [user] = await community.getUserByEmailOrUser(userName);
+  const [user] = (await community.getUserByEmailOrUser(userName)) as IUser[];
 
   if (postId && comment) {
     const date = getDate();
     await community.postComment(user.id, postId, comment, date);
-    const getComment = await community.getComments(postId);
-    const dateConverted = getComment.map((comment) => ({
+    const getComment = (await community.getComments(postId)) as IComment[];
+    const dateConverted = getComment.map((comment: IComment) => ({
       ...comment,
       date: howLong(comment.date),
     }));
@@ -210,12 +220,12 @@ app.post('/api/postList', async (req: Request, res: express.Response) => {
   const userName = res.locals.userName;
   const checkPostId = Number.isInteger(parseInt(postId));
   const statusCheck = ['0', '2'].includes(status);
-  const [user] = await community.getUserByEmailOrUser(userName);
+  const [user] = (await community.getUserByEmailOrUser(userName)) as IUser[];
   if (user.role !== '2') {
     res.send({ error: true, msg: 'sem cargo para aprovar o post!' });
   }
   if (checkPostId && statusCheck) {
-    const response = await community.approvedPost(postId, status);
+    const response = (await community.approvedPost(postId, status)) as ISql[];
     response[0].affectedRows === 1
       ? res.send({ error: false, msg: 'aprovado com sucesso!' })
       : res.send({ error: true, msg: 'falha ao aprovar!' });
@@ -246,9 +256,9 @@ app.get('/api/userList', async (req: Request, res: express.Response) => {
   const numberValid =
     Number.isInteger(parseInt(limit)) && Number.isInteger(parseInt(offset));
   if (numberValid) {
-    const data = await community.userList(+limit, +offset);
+    const data = (await community.userList(+limit, +offset)) as IUser[];
     const withOutUser = data.filter(
-      (each) => each.username.toLowerCase() !== userName,
+      (each: IUser) => each.username.toLowerCase() !== userName,
     );
     res.send(withOutUser);
     return;
@@ -270,7 +280,7 @@ app.post('/api/userList', async (req: Request, res: express.Response) => {
     });
   }
 
-  const [user] = await community.getUserByEmailOrUser(userName);
+  const [user] = (await community.getUserByEmailOrUser(userName)) as IUser[];
   const role = user.role === '2';
   if (!role) {
     res.send({
@@ -289,8 +299,8 @@ app.post('/api/userList', async (req: Request, res: express.Response) => {
 app.post('/api/auth', async (req: Request, res: express.Response) => {
   const { name, email, picture } = req.body;
   const date = getDate();
-  const data = await community.getUserByEmailOrUser(email);
-  if (!data.length) {
+  const [data] = (await community.getUserByEmailOrUser(email)) as IUser[];
+  if (!data) {
     community.createUser(picture, name, email, date);
   }
   res.send({

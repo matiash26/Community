@@ -1,6 +1,11 @@
-import * as multer from 'multer';
-
-const multerMiddleware = (err, req, res, next) => {
+import multer from 'multer';
+import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
+const multerMiddleware = (
+  err: ErrorRequestHandler,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   if (err instanceof multer.MulterError) {
     if (err.code === 'LIMIT_FILE_SIZE') {
       res.send({

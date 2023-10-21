@@ -1,13 +1,11 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "commonjs",
+  "main": "app.js",
   "scripts": {
-    "build": "tsc ./src/index.ts && tsc ./src/migration.ts",
-    "start": "node ./src/index.js",
-    "migration": "node ./src/migration.js"
+    "build": "npx tsc",
+    "start": "node dist/app.js",
+    "dev": "nodemon ./src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +16,7 @@
     "@types/luxon": "^3.3.2",
     "@types/multer": "^1.4.7",
     "@types/node": "^20.6.0",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
@@ -26,6 +25,8 @@
     "express": "^4.18.2",
     "luxon": "^3.4.3",
     "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.6.1"
-  }
+    "mysql2": "^3.6.1",
+    "nodemon": "^3.0.1"
+  },
+  "description": ""
 }

@@ -1,4 +1,4 @@
-import * as multer from 'multer';
+import multer from 'multer';
 import TypeOfMedia from './typeOfMedia';
 
 const multerStorage = function () {
@@ -20,7 +20,7 @@ const multerStorage = function () {
     return fileName;
   }
   function clearFilename() {
-    fileName = null;
+    fileName = '';
   }
   return { getFileName, storage, clearFilename };
 };

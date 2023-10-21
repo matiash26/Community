@@ -82,5 +82,5 @@ interface IUserApi {
 }
 interface ILogin {
   error: boolean;
-  data: IUser[];
+  data: IUser;
 }
