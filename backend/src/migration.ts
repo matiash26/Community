@@ -1,7 +1,7 @@
-import client from "./db/config.js";
-
+import client from './db/config.js';
 async function Migration() {
   const mysql = await client();
+
   const usersTable = await mysql.query(`
   CREATE TABLE IF NOT EXISTS users(
   id int not null AUTO_INCREMENT,
@@ -14,6 +14,7 @@ async function Migration() {
   PRIMARY KEY (id)
 )engine=innodb default charset=utf8;
 `);
+
   const postsTable = await mysql.query(`
 CREATE TABLE IF NOT EXISTS posts(
   id int not null AUTO_INCREMENT,
@@ -36,6 +37,7 @@ CREATE TABLE IF NOT EXISTS likes(
   PRIMARY KEY (id),
   FOREIGN KEY (likedByUserId) REFERENCES users(id)
 )engine=innodb default charset=utf8;`);
+
   const commentsTable = await mysql.query(`
 CREATE TABLE IF NOT EXISTS comments(
   id int not null AUTO_INCREMENT,
@@ -48,6 +50,7 @@ CREATE TABLE IF NOT EXISTS comments(
   FOREIGN KEY (userId) REFERENCES users(id)
 )engine=innodb default charset=utf8;
 `);
+  console.log('Migration executada com sucesso');
   return;
 }
 Migration();
