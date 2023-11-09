@@ -10,7 +10,9 @@ const multerStorage = function () {
     filename: function (req, file, cb) {
       const type = TypeOfMedia(file.originalname);
       if (type) {
-        const newFileName = `${Date.now() + btoa(file.originalname)}.${type}`;
+        const name = `${Date.now() + btoa(file.originalname)}`.slice(0, 50);
+        const newFileName = `${name}.${type}`;
+
         cb(null, newFileName);
         fileName = newFileName;
       }

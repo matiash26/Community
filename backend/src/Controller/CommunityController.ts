@@ -33,7 +33,7 @@ app.post(
     const userName = res.locals.userName;
     let fileName = getFileName();
     const date = getDate();
-    if (fileName || (textLenght && textLenght <= 500) && checkPage) {
+    if (fileName || (textLenght && textLenght <= 500 && checkPage)) {
       const name = fileName || videoId;
       const [user] = (await community.getUserByEmailOrUser(
         userName,
