@@ -7,7 +7,7 @@ import ModalByLink from '@/components/ModalByLink';
 import Header from '@/components/Header';
 
 export const metadata: Metadata = {
-  title: 'sarisCommunity',
+  title: 'comunidade',
 };
 
 export default async function RootLayout({

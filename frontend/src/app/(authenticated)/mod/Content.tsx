@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useInfinityScroll from '@/Hooks/useInfinityScroll';
 import { useSession } from 'next-auth/react';
 import { userList } from '@/utils/community';
@@ -15,9 +15,10 @@ export default function Content() {
   const { data: session } = useSession() as ISession;
   useInfinityScroll(setPag);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     const token = session?.accessToken as string;
     if (thereIsMoreData && token) {
+      console.log('rener');
       try {
         const response = (await userList({ ...pag, token })) as IUser[];
         setUserListData((prev) => [...prev, ...response]);
@@ -26,8 +27,7 @@ export default function Content() {
         console.error(error);
       }
     }
-  }, [pag, session]);
-
+  };
   useEffect(() => {
     fetchData();
   }, [pag, session]);

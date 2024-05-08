@@ -27,7 +27,7 @@ export default async function Profile({ params }: IParams) {
       <section className="profileSection">
         <div className="profileBanner">
           <div className="banner">
-            <img src="/banner.jpg" alt="" />
+            <img src="/banner.jpeg" alt="" />
           </div>
           <div className="profile">
             <div className="profilePic">

@@ -2,9 +2,9 @@
 import { useEffect, useCallback, useState } from 'react';
 import useInfinityScroll from '@/Hooks/useInfinityScroll';
 import UserPermission from '@/components/UserPermission';
+import UserPostTable from '@/components/UserPostTable';
 import { IPostTable } from '@/utils/type';
 import { useSession } from 'next-auth/react';
-import UserPostTable from '@/components/UserPostTable';
 import { postList } from '@/utils/community';
 import { ISession } from '@/context/SessionsProvider';
 

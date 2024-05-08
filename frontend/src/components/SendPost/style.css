@@ -121,7 +121,7 @@ form > div > button {
   font-weight: 600;
   transition: all 100ms ease-in-out;
 }
-form > div > button:hover {
+form > div > button:active {
   background-color: #4d1c6e;
   color: #b483d3;
   transition: all 100ms ease-in-out;
@@ -147,7 +147,7 @@ form > div > label > svg {
   font-size: 1.6rem;
   transition: color 100ms ease-in-out;
 }
-form > div > label > svg:hover {
+form > div > label > svg:active {
   color: #4d1c6e;
   transition: color 100ms ease-in-out;
 }

@@ -29,7 +29,7 @@ app.post(
   async (req: Request, res: Response) => {
     const { text, page, videoId } = req.body;
     const checkPage = page === 'Feed' || page === 'React';
-    const textLenght = text.split('').length;
+    const textLenght = text.trim().split('').length;
     const userName = res.locals.userName;
     let fileName = getFileName();
     const date = getDate();
@@ -144,7 +144,7 @@ app.get('/api/comment', async (req: Request, res: express.Response) => {
     const [getuserPost] = (await community.getPostById(postId)) as IPost[];
     const dataPostConvert = {
       ...getuserPost,
-      date: howLong(getuserPost.date),
+      date: howLong(getuserPost?.date),
     };
     const dateCommentConvert = getComment.map((comment: IComment) => ({
       ...comment,

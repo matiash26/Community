@@ -25,8 +25,8 @@ export default function SendPost() {
   const [opt, setOpt] = useState(false);
   const [select, setSelect] = useState('Feed');
   const [post, setPost] = useState<IPosts>(postInit);
-  const { data: session } = useSession() as ISession;
   const [error, setError] = useState<IResponse>(ErrorInit);
+  const { data: session } = useSession() as ISession;
 
   const fileName = post?.file?.name;
   const userTyping = !!post.text.split('').length;
@@ -65,12 +65,12 @@ export default function SendPost() {
       bodyFormData.append('page', select);
       try {
         const response = await postData(bodyFormData, token);
-        response.error && setError(response);
-        if (!response.error) {
-          console.log('render', response, post);
-          setPost({ text: '', file: null, videoId: '' });
-          setError(ErrorInit);
+        console.log(response);
+        if (response.error) {
+          setError(response);
+          return;
         }
+        setPost({ text: '', file: null, videoId: '' });
       } catch (error) {
         console.error(error);
       }

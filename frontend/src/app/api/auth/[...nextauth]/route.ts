@@ -4,7 +4,6 @@ import refreshToken from '@/utils/refreshToken';
 import ValidToken from '@/utils/ValidToken';
 import { login } from '@/utils/community';
 import NextAuth from 'next-auth';
-
 export const authOptions: NextAuthOptions = {
   providers: [
     TwitchProvider({

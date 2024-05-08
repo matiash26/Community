@@ -82,15 +82,15 @@ export default function Post({ postInf, children }: IPostInfo) {
               <span className="emoteCount">{emote.like}</span>
             </li>
             <li onClick={() => handleLike('1')}>
-              <img src="/emotes/mad.png" alt="mad" />
+              <img src="/emotes/mad.webp" alt="mad" />
               <span className="emoteCount">{emote.mad}</span>
             </li>
             <li onClick={() => handleLike('2')}>
-              <img src="/emotes/haha.png" alt="hahaha" />
+              <img src="/emotes/haha.webp" alt="hahaha" />
               <span className="emoteCount">{emote.funny}</span>
             </li>
             <li onClick={() => handleLike('3')}>
-              <img src="/emotes/clap.gif" alt="clap" />
+              <img src="/emotes/clap.webp" alt="clap" />
               <span className="emoteCount">{emote.clap}</span>
             </li>
           </ul>

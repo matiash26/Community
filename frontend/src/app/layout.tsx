@@ -8,8 +8,8 @@ const plex = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'sarisCommunity',
-  description: 'comunidade sarisla',
+  title: 'comunidade',
+  description: 'comunidade',
 };
 
 export default function RootLayout({

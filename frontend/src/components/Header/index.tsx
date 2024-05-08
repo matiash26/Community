@@ -8,7 +8,8 @@ function Header() {
     <header>
       <nav>
         <Link href="/" className="logo">
-          <img src="/logo.png" alt="logo" draggable="false"/>
+          {/* <img src="/logo.png" alt="logo" draggable="false"/> */}
+          <p>LOGO</p>
         </Link>
         <ul className="menu">
           <li>

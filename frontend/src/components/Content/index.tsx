@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import useInfinityScroll from '../../Hooks/useInfinityScroll';
 import { useSession } from 'next-auth/react';
 import { getAllFeed } from '@/utils/community';
@@ -8,7 +8,7 @@ import AlertScreen from './AlertScreen';
 import { IPost } from '@/utils/type';
 import Media from '../Media';
 import Post from '../Post';
-
+import CatSpinner from './CatSpinner';
 interface Props {
   page: string | undefined;
   user?: string;
@@ -17,15 +17,16 @@ const stateInit = { limit: 10, offset: 0 };
 function Content({ page, user }: Props) {
   const [pag, setPag] = useState(stateInit);
   const [posts, setPosts] = useState<IPost[]>([]);
-  const { data: session } = useSession() as ISession;
+  const [feedStatus, setFeedStatus] = useState({ empty: false, error: false });
   const [thereIsMoreData, setThereIsMoreData] = useState(true);
-  const [thereIsError, setThereIsError] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { data: session } = useSession() as ISession;
   useInfinityScroll(setPag);
 
-  const fetch = useCallback(async () => {
+  const fetch = async () => {
     const token = session?.accessToken as string;
     if (thereIsMoreData && token) {
+      setIsLoading(true);
       try {
         const response = await getAllFeed(
           page,
@@ -37,22 +38,26 @@ function Content({ page, user }: Props) {
         if (!response.error) {
           setPosts((prev) => [...prev, ...response.data]);
           response.data.length < 10 && setThereIsMoreData(false);
-          response.data.length < 1 && setIsEmpty(true);
+          response.data.length < 1 &&
+            setFeedStatus((prev) => ({ ...prev, empty: true }));
           return;
         }
       } catch (error) {
-        setIsEmpty(true);
-        setThereIsError(true);
+        setFeedStatus({ empty: true, error: true });
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     }
-  }, [pag, session]);
-
+  };
   useEffect(() => {
     fetch();
   }, [pag, session]);
 
-  if (isEmpty) return <AlertScreen error={thereIsError} />;
+  if (feedStatus.error || feedStatus.empty) {
+    return <AlertScreen error={feedStatus.error} />;
+  }
+
   return (
     <>
       {posts.map((post: IPost) => (
@@ -60,6 +65,7 @@ function Content({ page, user }: Props) {
           <Media key={post.id} path={post.pathMedia} />
         </Post>
       ))}
+      {isLoading && <CatSpinner />}
     </>
   );
 }

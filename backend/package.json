@@ -6,7 +6,7 @@
     "build": "npx tsc && npm run publicFolder",
     "start": "node dist/app.js",
     "dev": "nodemon ./src/app.ts",
-    "migration": "node ./dist/migration",
+    "migration": "node dist/migration",
     "publicFolder": "md dist\\public"
   },
   "keywords": [],

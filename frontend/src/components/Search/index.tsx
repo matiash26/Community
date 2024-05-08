@@ -31,7 +31,7 @@ function Search(): JSX.Element {
       </form>
       <ul className="listUserSearch">
         {search.map((user: IUser) => (
-          <li className="userSearch">
+          <li className="userSearch" key={user.username}>
             <Link href={'/perfil/' + user.username}>
               <img src={user.picture} alt="profile picture" />
               <span>{user.username}</span>
